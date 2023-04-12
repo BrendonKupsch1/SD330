@@ -1,97 +1,206 @@
 <!DOCTYPE html>
 <html>
-    <style>
-        /* Style for the buttons */
-        button {
-          background-color: #4CAF50; /* Green */
-          border: none;
-          color: white;
-          padding: 15px 32px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-          margin: 4px 2px;
-          cursor: pointer;
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Fridge</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+    
+    #frame {
+      width: 1200px;
+      height: 600px;
+      margin: 50px auto;
+      border: 5px solid #333;
+      padding: 20px;
+    }
+    
+    #fridge-img {
+      float: left;
+      width: 45%;
+    }
+    
+    #functions {
+      float: right;
+      width: 45%;
+    }
+
+    #on-off {
+      float: right;
+      width: 45%;
+    }
+    
+    #on-off-button {
+      display: block;
+      margin-bottom: 20px;
+    }
+    
+    #temperature {
+      cursor: pointer;
+    }
+    
+    #shopping-list {
+      margin-bottom: 20px;
+    }
+    
+    #timer {
+      margin-bottom: 20px;
+    }
+    
+    #music {
+      margin-bottom: 20px;
+    }
+  </style>
+
+</head>
+<body>
+  <div id="frame">
+    <img id="fridge-img" src="https://media.istockphoto.com/id/508701233/photo/filled-refrigerator.jpg?s=612x612&w=0&k=20&c=Ge-4spegKnwSDCJkW-S-Xu9rWi6pb_O8m1VbhaRnIhg=" height="600">
+    <div id="on-off">
+        <button id="on-off-button" onclick="toggleVisibility()">On/Off</button>
+    </div>
+    <div id="functions">
+      <div id="browser"></div>
+      <div>Current time: <span id="time" data-format="12" onclick="toggleTimeFormat()"></span></div>
+      <div><img id="ty-screen" src="" data-on="false" onclick="toggleTyScreen()"></div>
+      <div>Temperature: <span id="temperature" data-units="F" onclick="toggleTemperatureUnits()"></span></div>
+      <button onclick="increaseTemperature()">Up</button>
+      <button onclick="decreaseTemperature()">Down</button>
+      <div id="shopping-list">
+        <ul id="shopping-list-ul">
+          <li>Milk</li>
+          <li>Eggs</li>
+          <li>Bread</li>
+          <li>Cheese</li>
+          <li>Butter</li>
+        </ul>
+        <input type="text" id="item-input">
+        <button onclick="addItem()">Add item</button>
+      </div>
+      <div>Current weather: Sunny</div>
+      <div id="timer">
+        <button onclick="startTimer()">Start timer</button>
+        <span id="timer-seconds">60</span> seconds
+      </div>
+      <div id="music">
+        <div>Song: Example Song</div>
+        <div>Artist: Example Artist</div>
+        <div>Timestamp: 0:00</div>
+        <button>Rewind</button>
+        <button>Play/Pause</button>
+        <button>Fast forward</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Set initial values
+    var time = document.getElementById("time");
+    var temperature = document.getElementById("temperature");
+    time.innerHTML = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    temperature.innerHTML = (Math.floor(Math.random() * 11) + 30).toFixed(1);
+    // Function to toggle visibility of all functions
+    function toggleVisibility() {
+      var functionsDiv = document.getElementById("functions");
+      if (functionsDiv.style.display === "none") {
+        functionsDiv.style.display = "block";
+      } else {
+        functionsDiv.style.display = "none";
+      }
+    }
+    
+    // Function to toggle time format
+    function toggleTimeFormat() {
+      var time = document.getElementById("time");
+      if (time.getAttribute("data-format") === "12") {
+        time.innerHTML = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
+        time.setAttribute("data-format", "24");
+      } else {
+        time.innerHTML = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        time.setAttribute("data-format", "12");
+      }
+    }
+    
+    // Function to toggle tv screen
+    function toggleTvScreen() {
+      var tvScreen = document.getElementById("tv-screen");
+      if (tvScreen.getAttribute("data-on") === "false") {
+        tvScreen.src = "tv-screen.png";
+        tvScreen.setAttribute("data-on", "true");
+        var audio = new Audio('tv-sound.mp3');
+        audio.play();
+      } else {
+        tvScreen.src = "";
+        tvScreen.setAttribute("data-on", "false");
+      }
+    }
+    
+    // Function to toggle temperature units
+    function toggleTemperatureUnits() {
+      var temperature = document.getElementById("temperature");
+      if (temperature.getAttribute("data-units") === "F") {
+        var celsius = (temperature.innerHTML - 32) * 5 / 9;
+        temperature.innerHTML = celsius.toFixed(1);
+        temperature.setAttribute("data-units", "C");
+      } else {
+        var fahrenheit = temperature.innerHTML * 9 / 5 + 32;
+        temperature.innerHTML = fahrenheit.toFixed(1);
+        temperature.setAttribute("data-units", "F");
+      }
+    }
+    
+    // Function to increase temperature by 1 degree
+    function increaseTemperature() {
+      var temperature = document.getElementById("temperature");
+      temperature.innerHTML = parseFloat(temperature.innerHTML) + 1;
+    }
+    
+    // Function to decrease temperature by 1 degree
+    function decreaseTemperature() {
+      var temperature = document.getElementById("temperature");
+      temperature.innerHTML = parseFloat(temperature.innerHTML) - 1;
+    }
+    
+    // Function to add item
+    function addItem() {
+    var input = document.getElementById("item-input");
+    var list = document.getElementById("shopping-list-ul");
+    var item = document.createElement("li");
+    item.appendChild(document.createTextNode(input.value));
+    list.appendChild(item);
+    input.value = "";
+    }
+
+    // Function to start the timer
+    function startTimer() {
+    var timer = document.getElementById("timer-seconds");
+    var seconds = parseInt(timer.innerHTML);
+    var interval = setInterval(function() {
+        seconds--;
+        timer.innerHTML = seconds;
+        if (seconds === 0) {
+        var audio = new Audio('alarm.mp3');
+        audio.play();
+        clearInterval(interval);
         }
-  
-        /* Style for the picture */
-        img {
-          max-width: 100%;
-          height: 400px;
-        }
-      </style>
-      <head>
-        <title>Refrigerator App</title>
-    </head>
-    <body>
-        <!-- On/Off Buttons -->
-        <button id="onButton" onclick="showPage()">On</button>
-        <button id="offButton" onclick="hidePage()">Off</button>
-        <br>
-
-        <!-- Fridge Picture -->
-        <img id="fridgePic" src="https://media.istockphoto.com/id/508701233/photo/filled-refrigerator.jpg?s=1024x1024&w=is&k=20&c=OUosdX_9OFPtKQN8Nxkxf5L5Ur_hiusf6CS3O6FlYjg=">
-        <br>
-
-        <!-- TV -->
-        <iframe id="tv" src="https://www.youtube.com/embed/a4uU7UZRkUc"></iframe>
-
-        <!-- Browser -->
-        <script async src="https://cse.google.com/cse.js?cx=7532eef3d336b432d">
-        </script>
-        <div id="browser" class="gcse-search"></div>
-        
-        <!-- Clock -->
-        <div id="clock" style="float: left; width: 80px;"></div>
-
-        <!-- Temperature Displays -->
-        <div id="fridgeTemp" style="float: left; width: 200px;">Fridge temperature: </div>
-        <div id="freezerTemp" style="float: left; width: 200px;">Freezer temperature: </div>
-    </body>
-
-    <!-- Script to hide and show the page -->
-    <script>
-      function hidePage() {
-        document.getElementById("fridgePic").style.display = "none";
-        document.getElementById("clock").style.display = "none";
-        document.getElementById("fridgeTemp").style.display = "none";
-        document.getElementById("freezerTemp").style.display = "none";
-        document.getElementById("tv").style.display = "none";
-        document.getElementById("browser").style.display = "none";
-      }
-
-      function showPage() {
-        document.getElementById("fridgePic").style.display = "block";
-        document.getElementById("clock").style.display = "block";
-        document.getElementById("fridgeTemp").style.display = "block";
-        document.getElementById("freezerTemp").style.display = "block";
-        document.getElementById("tv").style.display = "block";
-        document.getElementById("browser").style.display = "block";
-      }
-    </script>
-
-    <!-- Script to update the clock and temperature displays -->
-    <script>
-      function updateTime() {
-        var now = new Date();
-        var hours = now.getHours();
-        var minutes = now.getMinutes();
-        var seconds = now.getSeconds();
-        var timeString = hours + ":" + minutes + ":" + seconds;
-        document.getElementById("clock").innerHTML = timeString;
-        setTimeout(updateTime, 1000);
-      }
-
-      function updateTemperatures() {
-        var fridgeTemp = Math.floor(Math.random() * 6) + 35;
-        var freezerTemp = Math.floor(Math.random() * 6) + 25;
-        document.getElementById("fridgeTemp").innerHTML = "Fridge temperature: " + fridgeTemp + "°F";
-        document.getElementById("freezerTemp").innerHTML = "Freezer temperature: " + freezerTemp + "°F";
-      }
-
-      updateTime();
-      updateTemperatures();
-    </script>
-    <footer><br><br>(c) B. Kupsch - 3/10/2023</footer>
+    }, 1000);
+    }
+    
+    const browser = document.getElementById('browser');
+	browser.innerHTML = `
+		<input type="text" placeholder="Enter URL">
+		<button>Go</button>
+		<iframe src="" frameborder="0"></iframe>
+	`;
+	const urlInput = browser.querySelector('input');
+	const goButton = browser.querySelector('button');
+	const iframe = browser.querySelector('iframe');
+	goButton.addEventListener('click', () => {
+		iframe.src = `https://${urlInput.value}`;
+	});
+  </script>
+</body>
 </html>
