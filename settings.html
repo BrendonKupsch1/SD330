@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Settings</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="homescreen.html">Home</a></li>
+        <li><a href="useraccount.html">User Account</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+    </nav>
+    <div class="breadcrumb">
+      <a href="homescreen.html">Home</a> > <a href="useraccount.html">User Account</a> > <span>Current Page</span>
+    </div>
+    <h1>User Settings</h1>
+  
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" value="John Doe">
+      <br>
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" value="johndoe@example.com">
+      <br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password">
+      <br>
+      <label for="confirm_password">Confirm Password:</label>
+      <input type="password" id="confirm_password" name="confirm_password">
+      <br>
+      <button type="submit">Save Changes</button>
+    </form>
+
+    <a href="passwordreset.html" class="next-page">Reset password</a>
+  </body>
+</html>
