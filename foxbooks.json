@@ -1,0 +1,104 @@
+{
+  "courses": [
+    {
+      "id": "C1",
+      "title": "Introduction to Programming",
+      "semester": "Fall",
+      "professor": "John Doe",
+      "books": [
+        {
+          "isbn": "978-1234567890",
+          "title": "Learn Programming",
+          "author": "Jane Smith",
+          "courseID": "C1"
+        },
+        {
+          "isbn": "978-0987654321",
+          "title": "Programming Basics",
+          "author": "John Brown",
+          "courseID": "C1"
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "title": "Web Development",
+      "semester": "Spring",
+      "professor": "Alice Johnson",
+      "books": [
+        {
+          "isbn": "978-1111111111",
+          "title": "HTML & CSS",
+          "author": "David Miller",
+          "courseID": "C2"
+        },
+        {
+          "isbn": "978-2222222222",
+          "title": "JavaScript: The Good Parts",
+          "author": "Douglas Crockford",
+          "courseID": "C2"
+        }
+      ]
+    },
+    {
+      "id": "C3",
+      "title": "Data Structures & Algorithms",
+      "semester": "Fall",
+      "professor": "Eve Adams",
+      "books": [
+        {
+          "isbn": "978-3333333333",
+          "title": "Data Structures and Algorithms in Python",
+          "author": "Michael T. Goodrich",
+          "courseID": "C3"
+        },
+        {
+          "isbn": "978-4444444444",
+          "title": "Introduction to Algorithms",
+          "author": "Thomas H. Cormen",
+          "courseID": "C3"
+        }
+      ]
+    },
+    {
+      "id": "C4",
+      "title": "Operating Systems",
+      "semester": "Spring",
+      "professor": "Frank Taylor",
+      "books": [
+        {
+          "isbn": "978-5555555555",
+          "title": "Modern Operating Systems",
+          "author": "Andrew S. Tanenbaum",
+          "courseID": "C4"
+        },
+        {
+          "isbn": "978-6666666666",
+          "title": "Operating System Concepts",
+          "author": "Abraham Silberschatz",
+          "courseID": "C4"
+        }
+      ]
+    },
+    {
+      "id": "C5",
+      "title": "Computer Networks",
+      "semester": "Fall",
+      "professor": "Grace Lee",
+      "books": [
+        {
+          "isbn": "978-7777777777",
+          "title": "Computer Networks",
+          "author": "Andrew S. Tanenbaum",
+          "courseID": "C5"
+        },
+        {
+          "isbn": "978-8888888888",
+          "title": "Data Communications and Networking",
+          "author": "Behrouz A. Forouzan",
+          "courseID": "C5"
+        }
+      ]
+    }
+  ]
+}
